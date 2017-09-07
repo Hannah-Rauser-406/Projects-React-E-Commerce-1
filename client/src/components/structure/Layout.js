@@ -1,15 +1,19 @@
 import React from 'react'
-import {domainData} from '../../lib/propTypes'
-
+import * as AppPropTypes from '../../lib/propTypes'
+import Header from './header/Header'
+import Main from './Main'
+import Footer from './Footer'
+// this file defines the high level construction of the app
+// header, footer, and main components
 const propTypes = {
-  domainData
+  domainData: AppPropTypes.domainData
 }
 
 const Layout = (props) => (
-  <div>
-    <h1>Hello World</h1>
-
-    <h2>Number of products: {props.domainData.products.length}</h2>
+  <div id='layout'>
+    <Header />
+    <Main domainData={props.domainData} />
+    <Footer />
   </div>
 )
 

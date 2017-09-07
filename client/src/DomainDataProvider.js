@@ -1,7 +1,10 @@
 import React, {Component} from 'react'
 import Layout from './components/structure/Layout'
 import * as ServerApi from './lib/serverApi'
-
+// the '* as' means import EVERYTHING from './lib/serverApi' and create an object
+// {
+//    getAllProducts: assign it to an object ServerApi
+// }
 class DomainDataProvider extends Component {
   state = {
     isLoaded: false,
@@ -19,16 +22,19 @@ class DomainDataProvider extends Component {
         products
       }))
 
-  render () {
-    const domainData = {
-      isLoaded: this.state.isLoaded,
-      products: this.state.products
-    }
+addProduct = (newProduct) => ServerApi.addProduct(newProduct, this.getAllProducts)
 
-    return (
-      <Layout domainData={domainData} />
-    )
+render () {
+  const domainData = {
+    isLoaded: this.state.isLoaded,
+    products: this.state.products,
+    addProduct: this.addProduct
   }
+
+  return (
+    <Layout domainData={domainData} />
+  )
+}
 }
 
 export default DomainDataProvider
