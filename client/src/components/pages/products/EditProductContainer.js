@@ -7,15 +7,20 @@ import EditProductForm from './EditProductForm'
 class EditProductContainer extends Component {
   static propTypes = {
     domainData: AppPropTypes.domainData,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired
   }
-  constructor () {
+  constructor (props) {
     super()
-    this.state = {
-      name: '',
-      category: '',
-      image: '',
-      price: ''
+    const productId = props.match.params.productId /* get id from url */
+    const product = props.domainData.findProductById(productId)
+    /* get product object from domain data */
+    this.state = { /* copy product into state */
+      _id: product._id,
+      name: product.name,
+      category: product.category,
+      image: product.image,
+      price: product.price
     }
   }
 
@@ -25,8 +30,9 @@ class EditProductContainer extends Component {
   onPriceChanged = (event) => this.setState({price: event.target.value})
 
   onSubmit = (event) => {
-    // prevent default, console-called
+    /* prevent default, console.log that it is called */
     event.preventDefault()
+    this.props.domainData.updateProduct(this.state)
     this.props.history.push('/products')
     console.log('submit button worked')
   }

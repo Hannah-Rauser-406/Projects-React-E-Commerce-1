@@ -25,7 +25,12 @@ const Products = (props) =>
       render={(routeProps) => <AddProductContainer domainData={props.domainData} history={routeProps.history} />}
     />
     <Route path='/products/edit/:productId'
-      render={(routeProps) => <EditProductContainer domainData={props.domainData} history={routeProps.history} />}
+      render={(routeProps) => <EditProductContainer
+        domainData={props.domainData}
+        history={routeProps.history}
+        match={routeProps.match}
+      />
+      }
     />
   </div>
 

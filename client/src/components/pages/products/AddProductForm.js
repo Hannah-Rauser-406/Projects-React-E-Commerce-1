@@ -23,6 +23,6 @@ const AddProductForm = (props) =>
     <input type='submit' value='Submit' />
   </form>
 
-AddProductForm.propTypes = PropTypes
+AddProductForm.propTypes = propTypes
 
 export default AddProductForm
