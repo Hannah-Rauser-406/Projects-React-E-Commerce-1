@@ -21,7 +21,7 @@ module.exports = (app, passport) => {
                 return res.status(500).json(err)
               }
               else {
-                return res.json(user)
+                return res.json({data: user})
               }
             })
           }
@@ -30,7 +30,7 @@ module.exports = (app, passport) => {
     })
     authenticator(req, res, next)
   })
-  //****** LOG IN (SIGN IN)*******
+  // ****** LOG IN (SIGN IN)*******
   app.post('/api/login', (req, res, next) => {
     // this is another way of passing in a required module its arguments for a given method
     const authenticator = passport.authenticate('local-login', (err, user, info) => {
@@ -43,7 +43,7 @@ module.exports = (app, passport) => {
         console.log(user)
         return res.json({
           message: 'Successfully logged in. Welcome back!',
-          user: user
+          data: user
         })
       })
     })

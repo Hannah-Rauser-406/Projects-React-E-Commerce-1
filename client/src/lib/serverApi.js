@@ -1,62 +1,29 @@
-const getAllProducts = (callback) => {
-  const options = {
-    method: 'GET'
-  }
-
-  fetch('/api/products', options)
-    .then(response => response.json())
-    .then(json => callback(json.data))
-}
-const addProduct = (product, callback) => {
+const ajaxRequest = (uri, method, body) => {
   const headers = new Headers({
     'Content-Type': 'application/json'
   })
 
   const options = {
-    headers,
-    method: 'POST',
-    body: JSON.stringify(product)
+    headers: headers,
+    method: method,
+    body: JSON.stringify(body)
   }
 
-  fetch('/api/products', options)
+  return fetch(`/api/${uri}`, options)
     .then(response => response.json())
-    .then(json => callback(json.data))
+    .then(json => json.data)
+    // .catch(err => //something)
 }
+// ************
+const getAllProducts = () => ajaxRequest('products', 'GET')
+// ************
+const addProduct = (product) => ajaxRequest('products', 'POST', product)
+// ****************
+const updateProduct = (product) => ajaxRequest(`products/${product._id}`, 'PUT', product)
+// ****************
+const deleteProduct = (productId) => ajaxRequest(`products/${productId}`, 'DELETE')
 
-const updateProduct = (product, callback) => {
-  const headers = new Headers({
-    'Content-Type': 'application/json'
-  })
-
-  const options = {
-    headers,
-    method: 'PUT',
-    body: JSON.stringify(product)
-  }
-
-  fetch(`/api/products/${product._id}`, options)
-    .then(response => response.json())
-    .then(json => {
-      console.log(json)
-      return json
-    })
-    .then(json => callback(json.data))
-}
-
-const deleteProduct = (productId, callback) => {
-  const options = {
-    method: 'DELETE'
-  }
-  fetch(`/api/products/${productId}`, options)
-    .then(response => response.json())
-    .then(json => {
-      console.log(json)
-      return json
-    })
-    .then(json => callback(json.data))
-}
-
-const signupUser = (user, callback) => {
+const signupUser = (user) => {
   const headers = new Headers({
     'Content-Type': 'application/json'
   })
@@ -67,12 +34,17 @@ const signupUser = (user, callback) => {
     body: JSON.stringify(user)
   }
 
-  fetch('/api/signup', options)
+  return fetch('/api/signup', options)
     .then(response => response.json())
-    .then(json => callback(json))
+    .then(json => json.data)
+    .then(data => {
+      console.log(data)
+      return data
+    })
+    .catch(err => console.log('catch error', err))
 }
-
-const loginUser = (email, password, callback) => {
+// *****************
+const loginUser = (email, password) => {
   const headers = new Headers({
     'Content-Type': 'application/json'
   })
@@ -83,9 +55,14 @@ const loginUser = (email, password, callback) => {
     body: JSON.stringify({email, password})
   }
 
-  fetch('/api/login', options)
+  return fetch('/api/login', options)
     .then(response => response.json())
-    .then(json => callback(json))
+    .then(json => json.data)
+    .then(data => {
+      console.log('data console in our login user function:', data)
+      return data
+    })
+    .catch(err => console.log('catch error', err))
 }
 
 export {getAllProducts, addProduct, updateProduct, signupUser, loginUser, deleteProduct}

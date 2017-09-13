@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {withRouter} from 'react-router-dom'
 import * as AppPropTypes from '../../../lib/propTypes'
 import LoginForm from './LoginForm'
 
@@ -23,7 +24,8 @@ class LoginContainer extends Component {
 onSubmit = (event) => {
   event.preventDefault()
   console.log('domain data', this.props.domainData)
-  this.props.history.push('/?????')
+  this.props.domainData.loginUser(this.state)
+  this.props.history.push('/products')
 }
 render () {
   return (
@@ -38,4 +40,4 @@ render () {
 }
 }
 
-export default LoginContainer
+export default withRouter(LoginContainer)

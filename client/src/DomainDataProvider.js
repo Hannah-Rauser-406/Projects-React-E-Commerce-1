@@ -17,28 +17,35 @@ class DomainDataProvider extends Component {
   }
 
   getAllProducts = () =>
-    ServerApi.getAllProducts(products =>
-      this.setState({
-        isLoaded: true,
-        products
-      }))
+    ServerApi.getAllProducts()
+      .then(products =>
+        this.setState({
+          isLoaded: true,
+          products
+        }))
 
-addProduct = (newProduct) => ServerApi.addProduct(newProduct, this.getAllProducts)
+addProduct = (newProduct) =>
+  ServerApi.addProduct(newProduct)
+    .then(this.getAllProducts)
 
-findProductById = (productId) => {
-  for (let i = 0; i < this.state.products.length; i++) {
-    const currentProduct = this.state.products[i]
+// findProductById = (productId) => {
+//   for (let i = 0; i < this.state.products.length; i++) {
+//     const currentProduct = this.state.products[i]
+//
+//     if (currentProduct._id === productId) {
+//       return currentProduct
+//     }
+//   }
+// }
+findProductById = (productId) => this.state.products.find(p => p._id === productId)
 
-    if (currentProduct._id === productId) {
-      return currentProduct
-    }
-  }
-}
 updateProduct = (product) =>
-  ServerApi.updateProduct(product, this.getAllProducts)
+  ServerApi.updateProduct(product)
+    .then(this.getAllProducts)
 
 deleteProduct = (productId) =>
-  ServerApi.deleteProduct(productId, this.getAllProducts)
+  ServerApi.deleteProduct(productId)
+    .then(this.getAllProducts)
 
 signupUser = (user) =>
   ServerApi.signupUser(user, (savedUser) => this.setState({

@@ -5,6 +5,7 @@ import Home from '../pages/Home'
 import About from '../pages/About'
 import Products from '../pages/products/Products'
 import SignUpContainer from '../pages/auth/SignUpContainer'
+import LoginContainer from '../pages/auth/LoginContainer'
 
 const propTypes = {
   domainData: AppPropTypes.domainData
@@ -36,6 +37,7 @@ const Main = (props) =>
     <Route path='/about' component={About} />
     <Route path='/products' render={() => <Products domainData={props.domainData} />} />
     <Route path='/signup' render={() => <SignUpContainer domainData={props.domainData} />} />
+    <Route path='/login' render={() => <LoginContainer domainData={props.domainData} />} />
   </main>
 
 Main.propTypes = propTypes
