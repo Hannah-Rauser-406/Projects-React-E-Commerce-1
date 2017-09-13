@@ -4,6 +4,7 @@ import * as AppPropTypes from '../../lib/propTypes'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Products from '../pages/products/Products'
+import SignUpContainer from '../pages/auth/SignUpContainer'
 
 const propTypes = {
   domainData: AppPropTypes.domainData
@@ -16,8 +17,8 @@ const styles = {
     bottom: 25,
     left: 0,
     right: 0,
-    overflow: 'scroll',
-    textColor: 'white'
+    overflow: 'scroll'
+    /* textColor: 'white' */
   },
   images: {
     backgroundImage: "url('images/kristian-gonzalez-308188.jpg')",
@@ -34,6 +35,7 @@ const Main = (props) =>
     <Route path='/' exact component={Home} />
     <Route path='/about' component={About} />
     <Route path='/products' render={() => <Products domainData={props.domainData} />} />
+    <Route path='/signup' render={() => <SignUpContainer domainData={props.domainData} />} />
   </main>
 
 Main.propTypes = propTypes

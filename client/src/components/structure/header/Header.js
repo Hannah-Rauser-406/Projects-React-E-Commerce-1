@@ -33,6 +33,10 @@ const Header = () =>
       <NavItem to='/about'>About</NavItem>
       &nbsp;&nbsp;&nbsp;
       <NavItem to='/products'>Products</NavItem>
+      &nbsp;&nbsp;&nbsp;
+      <NavItem to='/signup'>Sign Up</NavItem>
+      &nbsp;&nbsp;&nbsp;
+      <NavItem to='/login'>Log In</NavItem>
     </nav>
   </header>
 

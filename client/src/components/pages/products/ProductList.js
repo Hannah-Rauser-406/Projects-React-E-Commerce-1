@@ -20,9 +20,10 @@ const ProductList = (props) =>
     <Link to='/products/add'> Add A New Product </Link>
     { props.domainData.products.map(product =>
       <ProductCard
-        key={product.id}
+        key={product._id}
         product={product}
         onEdit={() => props.history.push(`/products/edit/${product._id}`)}
+        onDelete={() => props.domainData.deleteProduct(product._id)}
       />
     )
     }

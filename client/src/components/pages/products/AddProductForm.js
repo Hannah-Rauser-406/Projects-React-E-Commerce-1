@@ -11,7 +11,7 @@ const propTypes = {
 }
 
 const AddProductForm = (props) =>
-  <form>
+  <form onSubmit={props.onSubmit}>
     Name: <input type='text'
       onChange={props.onNameChanged} />
     Category: <input type='text'

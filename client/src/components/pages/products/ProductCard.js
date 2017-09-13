@@ -4,7 +4,8 @@ import * as AppPropTypes from '../../../lib/propTypes'
 
 const propTypes = {
   product: AppPropTypes.product,
-  onEdit: PropTypes.func.isRequired
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
 }
 
 const ProductCard = (props) =>
@@ -12,6 +13,7 @@ const ProductCard = (props) =>
     <h1>{props.product.name}</h1>
     <h3>{props.product.price}</h3>
     <button onClick={props.onEdit}>Edit</button>
+    <button onClick={props.onDelete}>Delete</button>
   </div>
 
 ProductCard.propTypes = propTypes
